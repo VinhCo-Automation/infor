@@ -1,0 +1,221 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Danh thiếp ảo • Võ Vinh Cơ</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet" />
+  <style>
+    :root { --brand:#2563eb; --brand2:#7c3aed; }
+    html,body{height:100%}
+    body{font-family:'Inter',sans-serif}
+    /* Background */
+    .bg-tech {
+      background: radial-gradient(1200px 600px at 50% -10%, rgba(37,99,235,.18), transparent 60%),
+                  radial-gradient(900px 500px at 120% 10%, rgba(124,58,237,.14), transparent 60%),
+                  linear-gradient(180deg, #0b1220 0%, #0b1220 45%, #0e1626 100%);
+    }
+    /* Glass card */
+    .glass {
+      backdrop-filter: blur(10px);
+      background: linear-gradient(180deg, rgba(255,255,255,.7), rgba(255,255,255,.55));
+      border: 1px solid rgba(255,255,255,.35);
+    }
+    /* Subtle floating animation */
+    @keyframes floatIn {
+      0% {opacity:0; transform: translateY(20px) scale(.98)}
+      100%{opacity:1; transform: translateY(0) scale(1)}
+    }
+    @keyframes fadeUp {
+      0% {opacity:0; transform: translateY(12px)}
+      100%{opacity:1; transform: translateY(0)}
+    }
+    .animate-card{ animation: floatIn .7s ease-out both }
+    .animate-item{ animation: fadeUp .5s ease-out both }
+
+    /* Avatar ring (white minimalist) */
+    .avatar-wrap{
+      position:relative;
+      display:inline-block;
+      padding:6px; /* white ring */
+      border-radius:9999px;
+      background:#fff;
+      box-shadow: 0 8px 30px rgba(0,0,0,.18);
+    }
+    .avatar-img{ width:120px; height:120px; border-radius:9999px; object-fit:cover; display:block; }
+
+    /* Toast */
+    #toast{ position:fixed; right:16px; bottom:16px; z-index:9999; opacity:0; transform: translateY(10px); transition: all .25s ease }
+    #toast.show{ opacity:1; transform: translateY(0) }
+
+    /* Copy pulse */
+    .copy-pulse:active{ transform: scale(.96) }
+
+    /* Nice hover for contact rows */
+    .row-hover{ transition: box-shadow .25s ease, transform .25s ease }
+    .row-hover:hover{ box-shadow: 0 10px 24px rgba(0,0,0,.08); transform: translateY(-2px) }
+  </style>
+</head>
+<body class="bg-tech min-h-screen flex items-center justify-center p-5">
+
+  <!-- Toast -->
+  <div id="toast" class="glass rounded-xl px-4 py-2 text-sm font-medium text-gray-800 shadow-lg">Đã sao chép!</div>
+
+  <!-- CARD -->
+  <main class="animate-card glass rounded-3xl shadow-2xl w-full max-w-md overflow-hidden">
+    <!-- Top cover -->
+    <header class="relative h-40">
+      <div class="absolute inset-0" style="background: radial-gradient(600px 220px at 30% -10%, rgba(37,99,235,.35), transparent 60%), radial-gradient(600px 220px at 85% -10%, rgba(124,58,237,.35), transparent 60%), linear-gradient(135deg, #1f2a44, #111827);"></div>
+      <!-- Avatar -->
+      <div class="absolute left-1/2 -bottom-14 -translate-x-1/2">
+        <div class="avatar-wrap">
+          <!-- TIP: Đặt file ảnh tối ưu của bạn tên 'avatar.jpg' cạnh file HTML -->
+          <img class="avatar-img" src="avatar.jpg" alt="Võ Vinh Cơ" onerror="this.src='image.png'">
+        </div>
+      </div>
+    </header>
+
+    <section class="pt-20 pb-2 text-center px-6">
+      <h1 class="text-2xl font-bold tracking-tight text-gray-900">VÕ VINH CƠ</h1>
+      <p class="mt-1 text-sm text-gray-600" id="subtitle">Kỹ sư Tự động hóa</p>
+    </section>
+
+    <!-- Contact rows -->
+    <section class="px-5 pt-2 pb-6 space-y-3">
+      <div class="animate-item row-hover bg-white rounded-2xl p-4 flex items-center justify-between shadow">
+        <div class="flex items-center gap-3">
+          <div class="w-9 h-9 rounded-full bg-blue-50 flex items-center justify-center">📱</div>
+          <div class="text-sm">
+            <p class="text-gray-900 font-semibold">Điện thoại</p>
+            <p id="phoneText" class="text-gray-600">0789661260</p>
+          </div>
+        </div>
+        <div class="flex items-center gap-2">
+          <a id="telLink" href="https://zalo.me/0789661260" class="text-xs px-3 py-1.5 rounded-full bg-blue-600 text-white hover:opacity-90">Zalo</a>
+          <button class="copy-btn copy-pulse text-xs px-3 py-1.5 rounded-full bg-blue-100 text-blue-700" data-copy="0789661260" data-i18n="copy">Sao chép</button>
+        </div>
+      </div>
+
+      <div class="animate-item row-hover bg-white rounded-2xl p-4 flex items-center justify-between shadow">
+        <div class="flex items-center gap-3">
+          <div class="w-9 h-9 rounded-full bg-violet-50 flex items-center justify-center">📧</div>
+          <div class="text-sm">
+            <p class="text-gray-900 font-semibold">Email</p>
+            <p id="emailText" class="text-gray-600">covo488@gmail.com</p>
+          </div>
+        </div>
+        <div class="flex items-center gap-2">
+          <button class="copy-btn copy-pulse text-xs px-3 py-1.5 rounded-full bg-violet-100 text-violet-700" data-copy="covo488@gmail.com" data-i18n="copy">Sao chép</button>
+        </div>
+      </div>
+
+      <div class="animate-item row-hover bg-white rounded-2xl p-4 flex items-center justify-between shadow">
+        <div class="flex items-center gap-3">
+          <div class="w-9 h-9 rounded-full bg-slate-100 flex items-center justify-center">🔗</div>
+          <div class="text-sm">
+            <p class="text-gray-900 font-semibold">Facebook</p>
+            <a id="facebookText" class="text-gray-600 hover:underline" href="https://www.facebook.com/Vi.nh.Co.26.10.03" target="_blank" rel="noopener">Vi.nh.Co.26.10.03</a>
+          </div>
+        </div>
+        <div class="flex items-center gap-2">
+          <a href="https://www.facebook.com/Vi.nh.Co.26.10.03" target="_blank" rel="noopener" class="text-xs px-3 py-1.5 rounded-full bg-slate-800 text-white hover:opacity-90" data-i18n="open">Mở</a>
+          <button class="copy-btn copy-pulse text-xs px-3 py-1.5 rounded-full bg-slate-200 text-slate-800" data-copy="https://www.facebook.com/Vi.nh.Co.26.10.03" data-i18n="copy">Sao chép</button>
+        </div>
+      </div>
+    </section>
+
+    <!-- Footer actions -->
+    <footer class="px-6 pb-6 pt-2 flex items-center justify-between">
+      <button id="langSwitch" class="text-xs px-3 py-2 rounded-full bg-white shadow row-hover" aria-label="Change language">A/Z</button>
+      <div class="flex items-center gap-2">
+        <!--<button id="btnQR" class="text-xs px-3 py-2 rounded-full bg-white shadow row-hover" data-i18n="qr">Mã QR</button>-->
+        <button id="btnSave" class="text-xs px-3 py-2 rounded-full bg-blue-600 text-white shadow hover:opacity-95" data-i18n="save">Lưu liên hệ</button>
+      </div>
+    </footer>
+  </main>
+
+  <!-- QR Modal 
+  <div id="qrModal" class="fixed inset-0 bg-black/40 hidden items-center justify-center p-6">
+    <div class="glass rounded-2xl shadow-2xl w-full max-w-xs p-5">
+      <div class="flex items-center justify-between mb-3">
+        <h3 class="font-semibold text-gray-900" data-i18n="qrTitle">Quét mã QR</h3>
+        <button id="qrClose" class="px-2 py-1 rounded-md bg-white/70">✕</button>
+      </div>
+      <div class="flex items-center justify-center">
+        <img id="qrImg" class="rounded-lg" alt="QR" src="https://api.qrserver.com/v1/create-qr-code/?size=220x220&margin=10&data=https%3A%2F%2Fwww.facebook.com%2FVi.nh.Co.26.10.03"/>
+      </div>
+    </div>
+  </div>-->
+
+  <script>
+    // ====== i18n ======
+    const i18n = {
+      vi: {
+        call: 'Gọi', email: 'Email', send: 'Gửi', open: 'Mở', copy: 'Sao chép',
+        saved: 'Đã lưu!', copied: 'Đã sao chép!', save: 'Lưu liên hệ', qr: 'Mã QR',
+        qrTitle: 'Quét mã QR', subtitle: 'Kỹ sư Tự động hóa'
+      },
+      en: {
+        call: 'Call', email: 'Email', send: 'Send', open: 'Open', copy: 'Copy',
+        saved: 'Saved!', copied: 'Copied!', save: 'Save Contact', qr: 'QR Code',
+        qrTitle: 'Scan QR Code', subtitle: 'Automation Engineer'
+      }
+    };
+    let lang = localStorage.getItem('lang') || 'vi';
+
+    function applyLang() {
+      document.querySelectorAll('[data-i18n]').forEach(el=>{
+        const k = el.getAttribute('data-i18n');
+        el.textContent = i18n[lang][k] || el.textContent;
+      });
+      const subtitle = document.getElementById('subtitle');
+      subtitle.textContent = i18n[lang].subtitle;
+    }
+
+    // ====== Toast ======
+    const toast = document.getElementById('toast');
+    function showToast(msg){ toast.textContent = msg; toast.classList.add('show'); setTimeout(()=>toast.classList.remove('show'), 2000); }
+
+    // ====== Copy (execCommand only for max compatibility) ======
+    function copyText(text){
+      const ta = document.createElement('textarea');
+      ta.value = text; ta.style.position='fixed'; ta.style.opacity='0';
+      document.body.appendChild(ta); ta.select(); document.execCommand('copy'); document.body.removeChild(ta);
+      showToast(i18n[lang].copied);
+    }
+    document.querySelectorAll('.copy-btn').forEach(b=> b.addEventListener('click',()=> copyText(b.dataset.copy)));
+
+    // ====== Lang switch ======
+    document.getElementById('langSwitch').addEventListener('click',()=>{ lang = (lang==='vi')?'en':'vi'; localStorage.setItem('lang',lang); applyLang(); });
+
+    // ====== Dynamic actions ======
+    const phone = document.getElementById('phoneText').textContent.trim();
+    document.getElementById('btnCall').addEventListener('click',()=> location.href = 'tel:'+phone);
+    document.getElementById('telLink').setAttribute('href','tel:'+phone);
+
+    // ====== Save Contact as vCard ======
+    document.getElementById('btnSave').addEventListener('click',()=>{
+      const vcf = [
+        'BEGIN:VCARD','VERSION:3.0','N:Co;Vo Vinh;;;','FN:Võ Vinh Cơ',
+        'TITLE:Automation Engineer','TEL;TYPE=CELL:'+phone,
+        'EMAIL;TYPE=INTERNET:covo488@gmail.com','URL:https://www.facebook.com/Vi.nh.Co.26.10.03','END:VCARD'
+      ].join('\n');
+      const blob = new Blob([vcf],{type:'text/vcard'});
+      const url = URL.createObjectURL(blob);
+      const a = document.createElement('a'); a.href = url; a.download = 'Vo-Vinh-Co.vcf'; a.click(); URL.revokeObjectURL(url);
+      showToast(i18n[lang].saved);
+    });
+
+    // ====== QR modal ======
+    const qrModal = document.getElementById('qrModal');
+    document.getElementById('btnQR').addEventListener('click',()=>{ qrModal.classList.remove('hidden'); qrModal.classList.add('flex'); });
+    document.getElementById('qrClose').addEventListener('click',()=>{ qrModal.classList.add('hidden'); qrModal.classList.remove('flex'); });
+
+    // init
+    applyLang();
+  </script>
+</body>
+</html>
