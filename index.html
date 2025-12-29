@@ -4,207 +4,222 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Võ Vinh Cơ - Liên hệ</title>
-
-  <!-- Tailwind config BEFORE CDN -->
-  <script>
-    window.tailwind = {
-      theme: {
-        extend: {
-          colors: {
-            brand: '#2563eb',
-            brand2: '#7c3aed',
-          }
-        }
-      }
-    }
-  </script>
-  <script defer src="https://cdn.tailwindcss.com"></script>
-
-  <!-- Font -->
+  <script src="https://cdn.tailwindcss.com"></script>
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet" />
-
   <style>
-    html, body { height: 100%; }
-    body { font-family: 'Inter', sans-serif; }
-
+    :root { --brand:#2563eb; --brand2:#7c3aed; }
+    html,body{height:100%}
+    body{font-family:'Inter',sans-serif}
     .bg-tech {
-      background:
-        radial-gradient(1200px 600px at 50% -10%, rgba(37,99,235,.18), transparent 60%),
-        radial-gradient(900px 500px at 120% 10%, rgba(124,58,237,.14), transparent 60%),
-        linear-gradient(180deg, #0b1220 0%, #0b1220 45%, #0e1626 100%);
+      background: radial-gradient(1200px 600px at 50% -10%, rgba(37,99,235,.18), transparent 60%),
+                  radial-gradient(900px 500px at 120% 10%, rgba(124,58,237,.14), transparent 60%),
+                  linear-gradient(180deg, #0b1220 0%, #0b1220 45%, #0e1626 100%);
     }
-
     .glass {
+      backdrop-filter: blur(10px);
       background: linear-gradient(180deg, rgba(255,255,255,.7), rgba(255,255,255,.55));
       border: 1px solid rgba(255,255,255,.35);
-      -webkit-backdrop-filter: blur(10px);
-      backdrop-filter: blur(10px);
     }
-
     @keyframes floatIn {
-      from { opacity: 0; transform: translateY(20px) scale(.98); }
-      to   { opacity: 1; transform: translateY(0) scale(1); }
+      0% {opacity:0; transform: translateY(20px) scale(.98)}
+      100%{opacity:1; transform: translateY(0) scale(1)}
     }
-
-    .animate-card {
-      animation: floatIn .7s ease-out both;
+    @keyframes fadeUp {
+      0% {opacity:0; transform: translateY(12px)}
+      100%{opacity:1; transform: translateY(0)}
     }
-
-    #toast {
-      position: fixed;
-      bottom: 32px;
-      left: 50%;
-      transform: translateX(-50%) translateY(20px);
-      opacity: 0;
-      transition: .25s ease;
-      z-index: 9999;
+    .animate-card{ animation: floatIn .7s ease-out both }
+    .animate-item{ animation: fadeUp .5s ease-out both }
+    .avatar-wrap{
+      position:relative; display:inline-block; padding:6px; 
+      border-radius:9999px; background:#fff; box-shadow: 0 8px 30px rgba(0,0,0,.18);
     }
-
-    #toast.show {
-      opacity: 1;
-      transform: translateX(-50%) translateY(0);
-    }
+    .avatar-img{ width:120px; height:120px; border-radius:9999px; object-fit:cover; display:block; background: #eee; }
+    #toast{ position:fixed; left:50%; transform: translateX(-50%) translateY(20px); bottom:32px; z-index:9999; opacity:0; transition: all .25s ease }
+    #toast.show{ opacity:1; transform: translateX(-50%) translateY(0) }
+    .row-hover{ transition: box-shadow .25s ease, transform .25s ease }
+    .row-hover:hover{ box-shadow: 0 10px 24px rgba(0,0,0,.08); transform: translateY(-2px) }
   </style>
 </head>
-
 <body class="bg-tech min-h-screen flex items-center justify-center p-5">
 
-  <!-- Toast -->
-  <div id="toast" class="glass rounded-xl px-6 py-2 text-sm font-semibold text-gray-800 shadow-lg">
-    Thông báo
-  </div>
+  <div id="toast" class="glass rounded-xl px-6 py-2 text-sm font-semibold text-gray-800 shadow-lg border border-white/50">Thông báo</div>
 
   <main class="animate-card glass rounded-3xl shadow-2xl w-full max-w-md overflow-hidden">
-
-    <!-- Header -->
     <header class="relative h-40">
-      <div class="absolute inset-0 bg-gradient-to-br from-slate-800 to-gray-900"></div>
+      <div class="absolute inset-0" style="background: radial-gradient(600px 220px at 30% -10%, rgba(37,99,235,.35), transparent 60%), radial-gradient(600px 220px at 85% -10%, rgba(124,58,237,.35), transparent 60%), linear-gradient(135deg, #1f2a44, #111827);"></div>
       <div class="absolute left-1/2 -bottom-14 -translate-x-1/2">
-        <div class="bg-white p-1 rounded-full shadow-xl">
-          <img
-            src="./avatar.jpg"
-            onerror="this.src='./image.png'"
-            alt="Võ Vinh Cơ"
-            class="w-28 h-28 rounded-full object-cover bg-gray-200"
-          >
+        <div class="avatar-wrap">
+          <img class="avatar-img" src="avatar.jpg" alt="Võ Vinh Cơ" onerror="this.src='image.png'">
         </div>
       </div>
     </header>
 
-    <!-- Info -->
-    <section class="pt-20 text-center px-6">
-      <h1 class="text-2xl font-bold text-gray-900">VÕ VINH CƠ</h1>
-      <p id="subtitle" class="mt-1 text-sm text-gray-600 font-medium">
-        Kỹ thuật Điều Khiển và Tự động hóa
-      </p>
+    <section class="pt-20 pb-2 text-center px-6">
+      <h1 class="text-2xl font-bold tracking-tight text-gray-900">VÕ VINH CƠ</h1>
+      <p class="mt-1 text-sm text-gray-600 font-medium" id="subtitle">Kỹ thuật Điều Khiển và Tự động hóa</p>
     </section>
 
-    <!-- Contact -->
-    <section class="px-5 py-6 space-y-3">
-
-      <!-- Phone -->
-      <div class="bg-white/80 rounded-2xl p-4 flex justify-between items-center shadow-sm">
-        <div class="flex gap-3 items-center">
-          <div class="w-10 h-10 rounded-full bg-blue-50 flex items-center justify-center">📱</div>
-          <div>
-            <p class="font-bold text-gray-900">Điện thoại</p>
-            <p class="text-gray-600">0789661260</p>
+    <section class="px-5 pt-2 pb-6 space-y-3">
+      <div class="animate-item row-hover bg-white/80 rounded-2xl p-4 flex items-center justify-between shadow-sm border border-white">
+        <div class="flex items-center gap-3">
+          <div class="w-10 h-10 rounded-full bg-blue-50 flex items-center justify-center text-lg">📱</div>
+          <div class="text-sm">
+            <p class="text-gray-900 font-bold" data-i18n="phoneTitle">Điện thoại</p>
+            <p id="phoneText" class="text-gray-600">0789661260</p>
           </div>
         </div>
-        <div class="flex gap-2">
-          <a href="tel:0789661260" class="px-3 py-1.5 text-xs rounded-full bg-blue-600 text-white">Gọi</a>
-          <button data-copy="0789661260" class="copy px-3 py-1.5 text-xs rounded-full bg-blue-100 text-blue-700">
-            Sao chép
-          </button>
+        <div class="flex items-center gap-2">
+          <a href="tel:0789661260" class="text-xs px-3 py-1.5 rounded-full bg-blue-600 text-white font-medium hover:bg-blue-700">Gọi</a>
+          <button class="copy-btn text-xs px-3 py-1.5 rounded-full bg-blue-100 text-blue-700 font-medium active:scale-95 transition-transform" data-copy="0789661260" data-i18n="copy">Sao chép</button>
         </div>
       </div>
 
-      <!-- Email -->
-      <div class="bg-white/80 rounded-2xl p-4 flex justify-between items-center shadow-sm">
-        <div class="flex gap-3 items-center">
-          <div class="w-10 h-10 rounded-full bg-violet-50 flex items-center justify-center">📧</div>
-          <div>
-            <p class="font-bold text-gray-900">Email</p>
-            <p class="text-gray-600">covo488@gmail.com</p>
+      <div class="animate-item row-hover bg-white/80 rounded-2xl p-4 flex items-center justify-between shadow-sm border border-white" style="animation-delay: 0.1s">
+        <div class="flex items-center gap-3">
+          <div class="w-10 h-10 rounded-full bg-violet-50 flex items-center justify-center text-lg">📧</div>
+          <div class="text-sm">
+            <p class="text-gray-900 font-bold">Email</p>
+            <p id="emailText" class="text-gray-600">covo488@gmail.com</p>
           </div>
         </div>
-        <button data-copy="covo488@gmail.com" class="copy px-3 py-1.5 text-xs rounded-full bg-violet-100 text-violet-700">
-          Sao chép
-        </button>
+        <div class="flex items-center gap-2">
+          <button class="copy-btn text-xs px-3 py-1.5 rounded-full bg-violet-100 text-violet-700 font-medium active:scale-95 transition-transform" data-copy="covo488@gmail.com" data-i18n="copy">Sao chép</button>
+        </div>
       </div>
 
-      <!-- Facebook -->
-      <div class="bg-white/80 rounded-2xl p-4 flex justify-between items-center shadow-sm">
-        <div class="flex gap-3 items-center">
-          <div class="w-10 h-10 rounded-full bg-slate-100 flex items-center justify-center">🔗</div>
-          <div>
-            <p class="font-bold text-gray-900">Facebook</p>
-            <a href="https://www.facebook.com/Vi.nh.Co.26.10.03" target="_blank" class="text-gray-600 underline">
-              Vi.nh.Co.26.10.03
-            </a>
+      <div class="animate-item row-hover bg-white/80 rounded-2xl p-4 flex items-center justify-between shadow-sm border border-white" style="animation-delay: 0.2s">
+        <div class="flex items-center gap-3">
+          <div class="w-10 h-10 rounded-full bg-slate-100 flex items-center justify-center text-lg">🔗</div>
+          <div class="text-sm">
+            <p class="text-gray-900 font-bold">Facebook</p>
+            <a href="https://www.facebook.com/Vi.nh.Co.26.10.03" target="_blank" class="text-gray-600 hover:underline block truncate w-32">Vi.nh.Co.26.10.03</a>
           </div>
         </div>
-        <a href="https://www.facebook.com/Vi.nh.Co.26.10.03" target="_blank"
-           class="px-3 py-1.5 text-xs rounded-full bg-slate-800 text-white">
-          Mở
-        </a>
+        <div class="flex items-center gap-2">
+          <a href="https://www.facebook.com/Vi.nh.Co.26.10.03" target="_blank" class="text-xs px-3 py-1.5 rounded-full bg-slate-800 text-white font-medium" data-i18n="open">Mở</a>
+          <button class="copy-btn text-xs px-3 py-1.5 rounded-full bg-slate-200 text-slate-800 font-medium" data-copy="https://www.facebook.com/Vi.nh.Co.26.10.03" data-i18n="copy">Sao chép</button>
+        </div>
       </div>
-
     </section>
 
-    <!-- Footer -->
-    <footer class="px-6 pb-6 flex justify-center">
-      <button id="saveContact"
-        class="px-6 py-2 rounded-full bg-blue-600 text-white font-bold shadow-md hover:bg-blue-700">
-        Lưu liên hệ
-      </button>
+    <footer class="px-6 pb-6 pt-2 flex items-center justify-between">
+      <button id="langSwitch" class="text-xs px-4 py-2 rounded-full bg-white shadow-sm border border-gray-100 font-bold text-gray-700 hover:bg-gray-50">VI / EN</button>
+      <div class="flex items-center gap-2">
+        
+        <button id="btnSave" class="text-xs px-5 py-2 rounded-full bg-blue-600 text-white font-bold shadow-md hover:bg-blue-700 transition-colors" data-i18n="save">Lưu liên hệ</button>
+      </div>
     </footer>
-
   </main>
 
-  <script>
-    const toast = document.getElementById('toast');
+  <div id="qrModal" class="fixed inset-0 bg-black/60 hidden items-center justify-center p-6 z-[10000] backdrop-blur-sm">
+    <div class="glass rounded-3xl shadow-2xl w-full max-w-xs p-6 text-center animate-card">
+      <div class="flex items-center justify-between mb-4">
+        <h3 class="font-bold text-gray-900" data-i18n="qrTitle">Quét mã QR</h3>
+        <button id="qrClose" class="w-8 h-8 flex items-center justify-center rounded-full bg-gray-200/50 hover:bg-gray-200">✕</button>
+      </div>
+      <div class="bg-white p-3 rounded-2xl inline-block shadow-inner mb-2">
+        <img id="qrImg" class="w-48 h-48" alt="QR" src="https://api.qrserver.com/v1/create-qr-code/?size=220x220&margin=10&data=https://www.facebook.com/Vi.nh.Co.26.10.03"/>
+      </div>
+      <p class="text-xs text-gray-500 mt-2">vinhco.profile</p>
+    </div>
+  </div>
 
-    function showToast(text) {
-      toast.textContent = text;
-      toast.classList.add('show');
-      setTimeout(() => toast.classList.remove('show'), 2000);
+  <script>
+    const i18n = {
+      vi: {
+        open: 'Mở', copy: 'Sao chép', saved: 'Đã lưu danh bạ!', copied: 'Đã sao chép!', 
+        save: 'Lưu liên hệ', qr: 'Mã QR', qrTitle: 'Quét mã QR', 
+        subtitle: 'Kỹ thuật Điều Khiển và Tự động hóa', phoneTitle: 'Điện thoại'
+      },
+      en: {
+        open: 'Open', copy: 'Copy', saved: 'Contact Saved!', copied: 'Copied!', 
+        save: 'Save Contact', qr: 'QR Code', qrTitle: 'Scan QR Code', 
+        subtitle: 'Control and Automation Engineering', phoneTitle: 'Phone'
+      }
+    };
+
+    let lang = localStorage.getItem('lang') || 'vi';
+
+    function applyLang() {
+      document.querySelectorAll('[data-i18n]').forEach(el => {
+        const key = el.getAttribute('data-i18n');
+        el.textContent = i18n[lang][key] || el.textContent;
+      });
+      document.getElementById('subtitle').textContent = i18n[lang].subtitle;
     }
 
-    // Copy
-    document.querySelectorAll('.copy').forEach(btn => {
-      btn.onclick = () => {
-        navigator.clipboard.writeText(btn.dataset.copy);
-        showToast('Đã sao chép!');
-      };
+    const toastEl = document.getElementById('toast');
+    function showToast(msg) {
+      toastEl.textContent = msg;
+      toastEl.classList.add('show');
+      setTimeout(() => toastEl.classList.remove('show'), 2000);
+    }
+
+    // Copy function
+    document.querySelectorAll('.copy-btn').forEach(btn => {
+      btn.addEventListener('click', () => {
+        const text = btn.getAttribute('data-copy');
+        navigator.clipboard.writeText(text).then(() => {
+          showToast(i18n[lang].copied);
+        }).catch(() => {
+          // Fallback
+          const ta = document.createElement('textarea');
+          ta.value = text; document.body.appendChild(ta); ta.select();
+          document.execCommand('copy'); document.body.removeChild(ta);
+          showToast(i18n[lang].copied);
+        });
+      });
     });
 
-    // Save vCard
-    document.getElementById('saveContact').onclick = () => {
-      const vcard = `
-BEGIN:VCARD
-VERSION:3.0
-FN:Võ Vinh Cơ
-N:Võ;Vinh Cơ;;;
-TITLE:Automation Engineer
-TEL;TYPE=CELL:0789661260
-EMAIL:covo488@gmail.com
-URL:https://www.facebook.com/Vi.nh.Co.26.10.03
-END:VCARD`.trim();
+    // Language switch
+    document.getElementById('langSwitch').addEventListener('click', () => {
+      lang = (lang === 'vi') ? 'en' : 'vi';
+      localStorage.setItem('lang', lang);
+      applyLang();
+    });
 
-      const blob = new Blob([vcard], { type: 'text/vcard' });
+    // QR Modal logic
+    const qrModal = document.getElementById('qrModal');
+    document.getElementById('btnQR').addEventListener('click', () => {
+      qrModal.classList.remove('hidden');
+      qrModal.classList.add('flex');
+    });
+    document.getElementById('qrClose').addEventListener('click', () => {
+      qrModal.classList.add('hidden');
+      qrModal.classList.remove('flex');
+    });
+    qrModal.addEventListener('click', (e) => { if(e.target === qrModal) qrModal.classList.add('hidden'); });
+
+    // Save Contact (vCard)
+    document.getElementById('btnSave').addEventListener('click', () => {
+      const phone = "0789661260";
+      const vcfData = [
+        'BEGIN:VCARD',
+        'VERSION:3.0',
+        'FN:Võ Vinh Cơ',
+        'N:Võ;Vinh Cơ;;;',
+        'TITLE:Automation Engineer',
+        'TEL;TYPE=CELL:' + phone,
+        'EMAIL;TYPE=INTERNET:covo488@gmail.com',
+        'URL:https://www.facebook.com/Vi.nh.Co.26.10.03',
+        'END:VCARD'
+      ].join('\n');
+
+      const blob = new Blob([vcfData], { type: 'text/vcard' });
       const url = URL.createObjectURL(blob);
-      const a = document.createElement('a');
-      a.href = url;
-      a.download = 'VoVinhCo.vcf';
-      a.click();
+      const link = document.createElement('a');
+      link.href = url;
+      link.download = 'VoVinhCo.vcf';
+      link.click();
       URL.revokeObjectURL(url);
+      showToast(i18n[lang].saved);
+    });
 
-      showToast('Đã lưu danh bạ!');
-    };
+    // Initialize
+    applyLang();
   </script>
-
 </body>
 </html>
